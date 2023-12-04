@@ -16,7 +16,7 @@ default : .gitmodules
 	git submodule update --remote
 
 .gitmodules:
-	$(foreach submodule, $(SUBMODULES), git submodule add $(submodule);)
+	$(foreach submodule, $(SUBMODULES), git submodule add -b main $(submodule);)
 
 #make pull
 pull:
