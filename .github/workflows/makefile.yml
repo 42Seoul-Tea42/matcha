@@ -1,17 +1,17 @@
-# name: Makefile CI
+name: Makefile CI
 
-# on:
-#   push:
-#     branches: [ "main" ]
-#   pull_request:
-#     branches: [ "main" ]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
-# jobs:
-  # build:
-  #   runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #   - uses: actions/checkout@v3
+    steps:
+    - uses: actions/checkout@v3
 
-  #   - name: Check for failures
-  #     run: exit 1
+    - name: Check for failures
+      run: exit 1
