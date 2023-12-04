@@ -1,0 +1,15 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    if: false # 모든 푸시 이벤트를 무시하도록 설정
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
