@@ -14,7 +14,7 @@ all : default
 default : .gitmodules
 	# git submodule update --init --recursive
 	# git submodule update --remote
-	mkdir -p ./service/mysql/database
+	mkdir -p ./service/postgresql/database
 	@cp ./env/.env ./service/
 	@if docker info | grep -q "not" || docker info | grep -q "ERROR"; then \
 		echo "\033[0;96m--- Docker will be running soon ---"; \
