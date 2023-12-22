@@ -1,3 +1,3 @@
 # matcha
-<img width="1188" alt="Screen Shot 2023-12-08 at 2 41 28 PM" src="https://github.com/42Seoul-Tea42/matcha/assets/109643814/1558ce17-4d63-4355-92f4-f491f6891c0b">
-<img width="1188" alt="Screen Shot 2023-12-08 at 2 41 40 PM" src="https://github.com/42Seoul-Tea42/matcha/assets/109643814/43a42a3a-6df7-45f7-98dc-ff94a49c2b26">
+<img width="860" alt="스크린샷 2023-12-23 오전 2 08 26" src="https://github.com/42Seoul-Tea42/matcha/assets/109643814/bdf823c6-87f1-4b17-bab9-8ebd2f72e778">
+<img width="860" alt="스크린샷 2023-12-23 오전 2 08 39" src="https://github.com/42Seoul-Tea42/matcha/assets/109643814/ebfbcdd6-1dbd-48c4-bbf9-7604fac2045b">
