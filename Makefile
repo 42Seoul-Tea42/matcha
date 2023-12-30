@@ -14,7 +14,7 @@ ENV_FILE := .env
 DOCKER_COMPOSE_FILE := docker-compose.yml
 
 all: .compose_dependency
-	make -C service/
+	docker compose up --build
 
 # 도커컴포즈 의존성 관계
 .compose_dependency:
@@ -29,17 +29,21 @@ link : .gitmodules @echo "Module ready"
 	$(foreach submodule, $(SUBMODULES), git submodule add -b main $(submodule);)
 
 # 도커 명령어
-down :
-	make -C service/ down	
+down	: 
+	docker-compose down
+	@rm -rf $(NAME)
 
-clean :
-	make -C service/ clean
+clean	:
+	make down
+	@docker system prune -af
 
-fclean :
-	make -C service/ fclean
+fclean	:
+	make clean
+	@docker volume rm $$(docker volume ls -q -f dangling=true) || docker volume ls
 
-re : 
-	make -C service/ re
+re		:
+	make fclean
+	make all
 
 #저장소 업데이트
 pull :
