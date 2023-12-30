@@ -1,27 +1,34 @@
-#repository uri
+#레포 경로
 BACK_REPO = git@github.com:42Seoul-Tea42/backend.git
 FRONT_REPO = git@github.com:42Seoul-Tea42/frontend.git
 SERVICE_REPO = git@github.com:42Seoul-Tea42/service.git
 ENV_REPO = git@github.com:42Seoul-Tea42/env.git
 #add some...
 
-#repo array
+#서브모듈
 SUBMODULES = $(BACK_REPO) $(FRONT_REPO) $(SERVICE_REPO) $(ENV_REPO)
 
-#기본 룰
-all : .gitmodules
-	mkdir -p ./service/postgresql/database
-	ln ./env/.env .
-	ln ./service/docker-compose.yml .
+#기본룰
+DB := ./service/postgresql/database
+ENV_FILE := .env
+DOCKER_COMPOSE_FILE := docker-compose.yml
+
+all: .compose_dependency
+	make -C service/
+
+# 도커컴포즈 의존성 관계
+.compose_dependency:
+	@mkdir -p $(DB)
+	@ln -f ./env/$(ENV_FILE) $(ENV_FILE)
+	@ln -f ./service/$(DOCKER_COMPOSE_FILE) $(DOCKER_COMPOSE_FILE)
+
+# 서브모듈 가져오기
+link : .gitmodules @echo "Module ready"
 
 .gitmodules:
 	$(foreach submodule, $(SUBMODULES), git submodule add -b main $(submodule);)
 
-# docker command
-
-up :
-	make -C service/
-
+# 도커 명령어
 down :
 	make -C service/ down	
 
