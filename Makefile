@@ -11,11 +11,31 @@ SUBMODULES = $(BACK_REPO) $(FRONT_REPO) $(SERVICE_REPO) $(ENV_REPO)
 #기본 룰
 all : .gitmodules
 	mkdir -p ./service/postgresql/database
-	ln ./env/.env ./service/
+	ln ./env/.env .
+	ln ./service/docker-compose.yml .
 
 .gitmodules:
 	$(foreach submodule, $(SUBMODULES), git submodule add -b main $(submodule);)
 
+# docker command
+
+up :
+	make -C service/
+
+down :
+	make -C service/ down	
+
+clean :
+	make -C service/ clean
+
+fclean :
+	make -C service/ fclean
+
+re : 
+	make -C service/ re
+
 #저장소 업데이트
 pull :
 	git submodule update --remote
+
+.phony: up down clean fclean re pull
