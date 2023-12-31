@@ -13,7 +13,7 @@ DB := ./service/postgresql/database
 ENV_FILE := .env
 DOCKER_COMPOSE_FILE := docker-compose.yml
 
-all: .compose_dependency
+all: .gitmodules .compose_dependency
 	docker compose up --build
 
 # 도커컴포즈 의존성 관계
