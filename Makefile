@@ -3,7 +3,6 @@ BACK_REPO = git@github.com:42Seoul-Tea42/backend.git
 FRONT_REPO = git@github.com:42Seoul-Tea42/frontend.git
 SERVICE_REPO = git@github.com:42Seoul-Tea42/service.git
 ENV_REPO = git@github.com:42Seoul-Tea42/env.git
-DOCS_REPO = git@github.com:42Seoul-Tea42/matcha-docs.git
 
 # 서브모듈 레포
 SUBMODULES = $(BACK_REPO) $(FRONT_REPO) $(SERVICE_REPO) $(ENV_REPO) $(DOCS_REPO)
