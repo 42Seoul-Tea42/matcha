@@ -26,7 +26,7 @@ all: .compose_dependency
 
 # 도커 명령어
 down: 
-	docker-compose down
+	docker compose down
 	@rm -rf $(NAME)
 
 clean:
