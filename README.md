@@ -5,8 +5,8 @@ Tea For Two는 프로필사진 기반 데이팅 애플리케이션 서비스를 
 
 기여자
 
-프론트엔드: [JaeJunday](https://github.com/jaejunday)
-백엔드: [Ozestina](https://github.com/Ozestina)
+- 프론트엔드: [JaeJunday](https://github.com/jaejunday)
+- 백엔드: [Ozestina](https://github.com/Ozestina)
 
 주요 기능
 실시간 채팅: 매칭이 연결된 상대간에 실시간 채팅을 제공합니다.
