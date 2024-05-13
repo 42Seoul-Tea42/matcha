@@ -11,6 +11,7 @@ SUBMODULES = $(BACK_REPO) $(FRONT_REPO) $(SERVICE_REPO) $(ENV_REPO) $(DOCS_REPO)
 # 도커컴포즈 의존성
 DB := ./service/postgresql/database
 ENV_FILE := .env
+ENV_FILE_PROD := .env.prod
 DOCKER_COMPOSE_FILE := docker-compose.yml
 
 all: .compose_dependency
@@ -21,10 +22,22 @@ all: .compose_dependency
 	@ln -f ./env/$(ENV_FILE) $(ENV_FILE)
 	@ln -f ./service/$(DOCKER_COMPOSE_FILE) $(DOCKER_COMPOSE_FILE)
 
+.compose_dependency_prod: .gitmodules
+	@mkdir -p $(DB)
+	@ln -f ./env/$(ENV_FILE_PROD) $(ENV_FILE_PROD)
+	@ln -f ./service/$(DOCKER_COMPOSE_FILE) $(DOCKER_COMPOSE_FILE)
+
 .gitmodules:
 	$(foreach submodule, $(SUBMODULES), git submodule add -b main $(submodule);)
 
+prod: .compose_dependency_prod
+	docker compose up --build
+
+
 # 도커 명령어
+docker:
+	./service/utils/init_docker.sh
+
 down: 
 	docker compose down
 	@rm -rf $(NAME)
