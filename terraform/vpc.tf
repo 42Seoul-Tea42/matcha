@@ -80,6 +80,6 @@ resource "aws_security_group" "rds_sg" {
   }
 
   tags = {
-    Name = "matcha-vpc"
+    Name = "matcha-rds"
   }
 }

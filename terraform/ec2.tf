@@ -7,6 +7,13 @@ resource "aws_instance" "matcha_prod" {
   vpc_security_group_ids      = [aws_security_group.web_sg.id]
   associate_public_ip_address = true
 
+  root_block_device {
+    volume_size           = 24    # 루트 볼륨 크기 (GiB)
+    volume_type           = "gp3" # 볼륨 타입 (기본값: gp2)
+    delete_on_termination = true  # 인스턴스 종료 시 볼륨 삭제 여부 (기본값: true)
+    encrypted             = true  # 볼륨 암호화 여부 (선택 사항)
+  }
+
   tags = {
     Name = "matcha-prod"
   }
@@ -34,9 +41,9 @@ resource "aws_eip" "matcha_prod_eip" {
   }
 
   # EIP가 의도치 않게 삭제되지 않도록 보호
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # 탄력적 IP를 EC2 인스턴스에 연결
@@ -45,22 +52,3 @@ resource "aws_eip_association" "matcha_prod_eip_assoc" {
   allocation_id = aws_eip.matcha_prod_eip.id
 }
 
-# gp3 EBS 볼륨 생성
-resource "aws_ebs_volume" "matcha_prod_volume" {
-  availability_zone = aws_instance.matcha_prod.availability_zone
-  size              = 16
-  type              = "gp3"
-
-  tags = {
-    Name = "matcha-prod-volume"
-  }
-}
-
-# EBS 볼륨을 EC2 인스턴스에 연결
-resource "aws_volume_attachment" "matcha_prod_volume_attach" {
-  device_name = "/dev/sdf" # Linux에서 사용할 장치 이름
-  volume_id   = aws_ebs_volume.matcha_prod_volume.id
-  instance_id = aws_instance.matcha_prod.id
-
-  depends_on = [aws_ebs_volume.matcha_prod_volume]
-}
